@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>libDB Login</title>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Account Login</h1>
+            <form id="login-form">
+                <input type="text" id="login-username" name="username"
+                       placeholder="Username" required="required" autofocus
+                       pattern="^[A-Za-z0-9_]{1,16}$"
+                       title="Username must be 1-16 characters and can only contain
+                       letters, numbers, and underscores"/>
+                <input type="password" id="login-password" name="password"
+                       placeholder="Password" required="required"
+                       pattern=".{6,}"
+                       title="Password must have at least 6 characters"/>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </body>
+</html>
