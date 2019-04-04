@@ -26,7 +26,7 @@ function submitForm(form, urlEncodedDataPairs) {
 
         switch(xhttp.status) {
             case 200: // HTTP 200: OK
-                // Customers and Employees go to different pages
+                // Members and Employees go to different pages
                 break;
             case 400: // HTTP 400: Bad request
                 errorMessageSpan.innerText = xhttp.responseText;

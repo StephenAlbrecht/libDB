@@ -1,0 +1,4 @@
+allprojects {
+    group = 'libDB'
+    version = '0.0.1'
+}
