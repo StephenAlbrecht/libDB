@@ -7,6 +7,9 @@
     <body>
         <div class="container">
             <h1>Account Login</h1>
+            <div id="errorWindow" class="alert alert-danger" role="alert" style="display: none;">
+                <span id="errorWindowMessage"></span>
+            </div>
             <form id="login-form">
                 <input type="text" id="login-username" name="username"
                        placeholder="Username" required="required" autofocus
@@ -21,4 +24,5 @@
             </form>
         </div>
     </body>
+    <script src="index.js"></script>
 </html>
