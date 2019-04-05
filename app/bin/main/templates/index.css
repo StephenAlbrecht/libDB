@@ -1,0 +1,36 @@
+body {
+    background: #ffeed9;
+}
+
+form   { display: table;      }
+form p { display: table-row;  }
+input  { display: table-cell; }
+label  {
+    display: table-cell;
+    text-align: right;
+    padding: 3px;
+}
+
+.container {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (max-width: 1240px) {
+    .container {
+        width: 80%;
+    }
+}
+
+#login-form {
+    float: right;
+}
+
+h1 {
+    display: inline;
+}
+
+#login-form button {
+    float: right;
+}

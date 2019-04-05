@@ -5,4 +5,4 @@ pluginManagement {
 }
 rootProject.name = 'libDB'
 
-include 'api'
+include 'app'
