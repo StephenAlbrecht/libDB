@@ -34,3 +34,7 @@ h1 {
 #login-form button {
     float: right;
 }
+
+#search-results {
+    width: 100%;
+}

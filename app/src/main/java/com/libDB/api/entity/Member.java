@@ -1,4 +1,4 @@
-package com.libDB.api;
+package com.libDB.api.entity;
 
 import java.sql.Date;
 

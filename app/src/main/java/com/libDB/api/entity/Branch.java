@@ -1,4 +1,4 @@
-package com.libDB.api;
+package com.libDB.api.entity;
 
 public class Branch {
     private String id;
