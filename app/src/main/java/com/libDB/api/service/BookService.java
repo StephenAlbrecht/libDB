@@ -6,5 +6,5 @@ import com.libDB.api.entity.Book;
 
 public interface BookService {
 
-    List<Book> getBooksByOptions(Book book);
+    List<Book> getBooksByOptions(String id, String isbn, String title, String author, String genre);
 }

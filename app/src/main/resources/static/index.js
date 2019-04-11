@@ -23,9 +23,21 @@ searchForm.addEventListener('submit', (formEvent) => {
     
     formEvent.preventDefault();
 
-    let urlEncodedDataPairs = [];
+    const id = document.getElementById('bookID').value;
+    const isbn = document.getElementById('isbn').value;
+    const title = document.getElementById('book-title').value;
+    const author = document.getElementById('book-author').value;
+    const genre = document.getElementById('book-genre').value;
     
-    submitSearchForm(searchForm, urlEncodedDataPairs);
+    const book = {
+        "id": id,
+        "isbn": isbn,
+        "title": title,
+        "author": author,
+        "genre": genre
+    }
+
+    submitSearchForm(book);
 })
 
 function submitLoginForm(form, urlEncodedDataPairs) {
@@ -74,7 +86,7 @@ function submitLoginForm(form, urlEncodedDataPairs) {
 
 }
 
-function submitSearchForm(form, urlEncodedDataPairs) {
+function submitSearchForm(book) {
     
     const xhttp = new XMLHttpRequest();
 
@@ -103,17 +115,10 @@ function submitSearchForm(form, urlEncodedDataPairs) {
         errorMessageSpan.innerText = "Error: " + xhttp.statusText + " (" + xhttp.status + ")";
     });
 
-    // Combine the pairs into a single string and replace all %-encoded spaces to
-    // the '+' character; matches the behaviour of browser form submissions.
-    let urlEncodedData = urlEncodedDataPairs.join('&').replace(/%20/g, '+');
+    const params = `id=${book.id}&isbn=${book.isbn}&title=${book.title}&author=${book.author}&genre=${book.genre}`;
 
     // Set up our request
-    // We don't use a url parameter for some security. Don't really want to open up
-    // a way to hijack the url an attacker can POST to (not that it's likely anyways)
-    xhttp.open('GET', 'http://localhost:8080/api/getBooks');
-
-    // Add the required HTTP header for form data POST requests
-    xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhttp.open('GET', 'http://localhost:8080/api/getBooks?' + params);
 
     // Finally, send our data.
     xhttp.send();

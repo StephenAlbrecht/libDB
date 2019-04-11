@@ -17,6 +17,7 @@ import org.springframework.stereotype.Repository;
 
 import com.libDB.api.entity.Book;
 import com.libDB.api.mapper.BookRowMapper;
+import com.libDB.util.StringUtils;
 
 @Repository
 public class BookDaoImpl implements BookDao {
@@ -28,8 +29,48 @@ public class BookDaoImpl implements BookDao {
     }
 
     @Override
-    public List<Book> getBooksByOptions(Book book) {
-        return template.query("select * from public.\"Book\"", new BookRowMapper());
+    public List<Book> getBooksByOptions(String id, String isbn, String title, String author, String genre) {
+
+        String query = "select * from public.\"Book\"";
+        
+        boolean addAndToQuery = false;
+        if (!StringUtils.IsNullOrWhiteSpace(id)) {
+            query += " where \"BookID\" = \'" + id + "\'";
+            addAndToQuery = true;
+        }
+        
+        if (!StringUtils.IsNullOrWhiteSpace(isbn)) {
+            String constraint = "\"ISBN\" = \'" + isbn + "\'";
+            query += (addAndToQuery)
+                ? " and " + constraint
+                : " where " + constraint;
+            addAndToQuery = true;
+        }
+        
+        if (!StringUtils.IsNullOrWhiteSpace(title)) {
+            String constraint = "\"Title\" LIKE \'%" + title + "%\'";
+            query += (addAndToQuery)
+                ? " and " + constraint
+                : " where " + constraint;
+            addAndToQuery = true;
+        }
+        
+        if (!StringUtils.IsNullOrWhiteSpace(author)) {
+            String constraint = "\"Author\" LIKE \'%" + author + "%\'";
+            query += (addAndToQuery)
+                ? " and " + constraint
+                : " where " + constraint;
+            addAndToQuery = true;
+        }
+        
+        if (!StringUtils.IsNullOrWhiteSpace(genre)) {
+            String constraint = "\"Genre\" LIKE \'%" + genre + "%\'";
+            query += (addAndToQuery)
+                ? " and " + constraint
+                : " where " + constraint;
+        }
+
+        return template.query(query, new BookRowMapper());
     }
 }
 
