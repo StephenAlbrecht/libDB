@@ -23,6 +23,7 @@ searchForm.addEventListener('submit', (formEvent) => {
     
     formEvent.preventDefault();
 
+    // TODO: Need to sanitize inputs to prevent sql injection?
     const id = document.getElementById('bookID').value;
     const isbn = document.getElementById('isbn').value;
     const title = document.getElementById('book-title').value;
@@ -51,21 +52,19 @@ function submitLoginForm(form, urlEncodedDataPairs) {
                 // Members and Employees go to different pages
                 break;
             case 400: // HTTP 400: Bad request
-                errorMessageSpan.innerText = xhttp.responseText;
+                alert(xhttp.responseText);
                 break;
             case 401: // HTTP 401: Unauthorized -- invalid credentials
-                errorMessageSpan.innerText = xhttp.responseText;
+                alert(xhttp.responseText);
                 break;
             default:
-                errorMessageSpan.innerText = 'HTTP ' + xhttp.status + '+ ' + xhttp.statusText;
+                alert('HTTP ' + xhttp.status + '+ ' + xhttp.statusText);
                 break;
         }
     });
 
     // Define what happens in case of error
     xhttp.addEventListener('error', function () {
-        setInvisible(errorWindow, false);
-
         errorMessageSpan.innerText = "Error: " + xhttp.statusText + " (" + xhttp.status + ")";
     });
 
@@ -76,7 +75,7 @@ function submitLoginForm(form, urlEncodedDataPairs) {
     // Set up our request
     // We don't use a url parameter for some security. Don't really want to open up
     // a way to hijack the url an attacker can POST to (not that it's likely anyways)
-    xhttp.open('POST', '' + (form.id === 'login-form' ? 'login' : 'register'));
+    xhttp.open('POST', 'http://localhost:8080/api/memberLogin');
 
     // Add the required HTTP header for form data POST requests
     xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -97,13 +96,13 @@ function submitSearchForm(book) {
                 printBooks(JSON.parse(xhttp.responseText));
                 break;
             case 400: // HTTP 400: Bad request
-                errorMessageSpan.innerText = xhttp.responseText;
+                alert(xhttp.responseText);
                 break;
-            case 401: // HTTP 401: Unauthorized -- invalid credentials
-                errorMessageSpan.innerText = xhttp.responseText;
+            case 401: // HTTP 401: Unauthorized
+                alert(xhttp.responseText);
                 break;
             default:
-                errorMessageSpan.innerText = 'HTTP ' + xhttp.status + '+ ' + xhttp.statusText;
+                alert('HTTP ' + xhttp.status + '+ ' + xhttp.statusText);
                 break;
         }
     });
@@ -124,23 +123,14 @@ function submitSearchForm(book) {
     xhttp.send();
 }
 
-function setInvisible(el, invis) {
-    if (invis) {
-        el.style.display = "none";
-    } else {
-        el.style.display = ""
-    }
-}
-
-function isInvisible(el) {
-    return el.style.display === "none";
-}
-
 function printBooks(bookList) {
+
+    // Delete contents of table
     while(searchResults.hasChildNodes()) {
         searchResults.removeChild(searchResults.firstChild);
     }
 
+    // Create header row
     const header = searchResults.insertRow();
     header.insertCell(0).innerHTML = "Book ID".bold();
     header.insertCell(1).innerHTML = "ISBN".bold();
@@ -149,6 +139,7 @@ function printBooks(bookList) {
     header.insertCell(4).innerHTML = "Genre".bold();
     header.insertCell(5).innerHTML = "Pages".bold();
 
+    // Add new row for each entry
     bookList.forEach((book) => {
         const row = searchResults.insertRow();
         row.insertCell(0).innerHTML = book.id;
