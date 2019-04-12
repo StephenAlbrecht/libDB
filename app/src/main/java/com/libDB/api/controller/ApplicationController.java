@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.libDB.api.entity.Book;
 import com.libDB.api.service.BookService;
+import com.libDB.api.entity.Transaction;
+import com.libDB.api.service.TransactionService;
 
 @RestController
 @RequestMapping("/api")
@@ -32,5 +34,15 @@ class ApplicationController {
             @RequestParam(name="genre", required=false, defaultValue="") String genre) 
     {
         return bookService.getBooksByOptions(id, isbn, title, author, genre);
+    }
+
+    @Resource
+    TransactionService transactionService;
+
+    @GetMapping(value = "/getTransactions")
+    public List<Transaction> getTransactions(
+            @RequestParam(name="memberID", required=true, defaultValue="") String memberID)
+    {
+        return transactionService.getTransactionsByMember(memberID);
     }
 }
