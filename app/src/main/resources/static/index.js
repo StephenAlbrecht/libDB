@@ -11,11 +11,12 @@ loginForm.addEventListener('submit', (formEvent) => {
     const username = document.getElementById('login-username').value;
     const password = document.getElementById('login-password').value;
 
-    let urlEncodedDataPairs = [];
-    urlEncodedDataPairs.push('username='+encodeURIComponent(username));
-    urlEncodedDataPairs.push('password='+encodeURIComponent(password));
+    const credentials = {
+        "username" : username,
+        "password" : password
+    }
 
-    submitLoginForm(loginForm, urlEncodedDataPairs);
+    submitLoginForm(loginForm, credentials);
 
 }, false);
 
@@ -41,7 +42,7 @@ searchForm.addEventListener('submit', (formEvent) => {
     submitSearchForm(book);
 })
 
-function submitLoginForm(form, urlEncodedDataPairs) {
+function submitLoginForm(form, credentials) {
 
     const xhttp = new XMLHttpRequest();
 
@@ -49,7 +50,11 @@ function submitLoginForm(form, urlEncodedDataPairs) {
 
         switch(xhttp.status) {
             case 200: // HTTP 200: OK
-                // Take member to memberHome.html
+                //TODO: configure backend to send 401 response if invalid
+                const isValid = xhttp.responseText === "true";
+                if (isValid) {
+                    window.location.href = '/memberHome.html?username=' + credentials.username;
+                }
                 break;
             case 400: // HTTP 400: Bad request
                 alert(xhttp.responseText);
@@ -70,18 +75,22 @@ function submitLoginForm(form, urlEncodedDataPairs) {
 
     // Combine the pairs into a single string and replace all %-encoded spaces to
     // the '+' character; matches the behaviour of browser form submissions.
+
+    let urlEncodedDataPairs = [];
+    urlEncodedDataPairs.push('username='+encodeURIComponent(credentials.username));
+    urlEncodedDataPairs.push('password='+encodeURIComponent(credentials.password));
     let urlEncodedData = urlEncodedDataPairs.join('&').replace(/%20/g, '+');
 
     // Set up our request
     // We don't use a url parameter for some security. Don't really want to open up
     // a way to hijack the url an attacker can POST to (not that it's likely anyways)
-    xhttp.open('POST', 'http://localhost:8080/api/memberLogin');
+    xhttp.open('POST', 'http://localhost:8080/api/memberLogin?' + urlEncodedData);
 
     // Add the required HTTP header for form data POST requests
     xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
     // Finally, send our data.
-    xhttp.send(urlEncodedData);
+    xhttp.send();
 
 }
 

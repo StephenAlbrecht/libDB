@@ -17,7 +17,7 @@ public class TransactionRowMapper implements RowMapper<Transaction> {
         transaction.setTimeOut(rs.getString("TimeOut"));
         transaction.setTimeIn(rs.getString("TimeIn"));
         transaction.setBranchAddressOut(rs.getString("AddressOut"));
-        transaction.setBranchAddressIn(rs.getInt("AddressIn"));
+        transaction.setBranchAddressIn(rs.getString("AddressIn"));
 
         return transaction;
     }

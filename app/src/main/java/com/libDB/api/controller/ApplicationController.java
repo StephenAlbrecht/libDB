@@ -17,6 +17,8 @@ import com.libDB.api.entity.Book;
 import com.libDB.api.service.BookService;
 import com.libDB.api.entity.Transaction;
 import com.libDB.api.service.TransactionService;
+import com.libDB.api.service.LoginService;
+
 
 @RestController
 @RequestMapping("/api")
@@ -44,5 +46,24 @@ class ApplicationController {
             @RequestParam(name="memberID", required=true, defaultValue="") String memberID)
     {
         return transactionService.getTransactionsByMember(memberID);
+    }
+    
+    @Resource
+    LoginService loginService;
+
+    @PostMapping(value = "/memberLogin")
+    public boolean memberLogin(
+        @RequestParam(name="username", required=true, defaultValue="") String id,
+        @RequestParam(name="password", required=true, defaultValue="") String password)
+    {
+        return loginService.validateMember(id, password);
+    }
+    
+    @PostMapping(value = "/employeeLogin")
+    public boolean employeeLogin(
+        @RequestParam(name="username", required=true, defaultValue="") String id,
+        @RequestParam(name="password", required=true, defaultValue="") String password)
+    {
+        return loginService.validateEmployee(id, password);
     }
 }

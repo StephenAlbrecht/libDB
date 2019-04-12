@@ -33,8 +33,8 @@ public class TransactionDaoImpl implements TransactionDao {
 
         String query = "select * from public.\"Transaction\"";
         
-        if (!StringUtils.IsNullOrWhiteSpace(memberid)) {
-            query += " where \"MemberID\" = \'" + memberid + "\'";
+        if (!StringUtils.IsNullOrWhiteSpace(memberID)) {
+            query += " where \"MemberID\" = \'" + memberID + "\'";
         }
 
         return template.query(query, new TransactionRowMapper());

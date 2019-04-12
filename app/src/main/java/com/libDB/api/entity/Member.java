@@ -4,14 +4,14 @@ import java.sql.Date;
 
 public class Member {
     private String id;
-    private Date joined;
+    private String joined;
     private String firstName;
     private String lastName;
     private String address;
 
     public Member() {}
 
-    public Member(String id, Date joined, String firstName, 
+    public Member(String id, String joined, String firstName, 
         String lastName, String address) {
         this.id = id;
         this.joined = joined;
@@ -44,14 +44,14 @@ public class Member {
     /**
      * @return the joined
      */
-    public Date getJoined() {
+    public String getJoined() {
         return joined;
     }
 
     /**
      * @param joined the joined to set
      */
-    public void setJoined(Date joined) {
+    public void setJoined(String joined) {
         this.joined = joined;
     }
 

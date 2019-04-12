@@ -5,14 +5,14 @@ import java.sql.Date;
 public class Transaction {
     private String bookTitle;
     private String bookAuthor;
-    private Date timeOut;
-    private Date timeIn;
+    private String timeOut;
+    private String timeIn;
     private String branchAddressOut;
     private String branchAddressIn;
 
     public Transaction() {}
 
-    public Transaction(String bookTitle, String bookAuthor, Date timeOut, Date timeIn, String branchAddressOut, String branchAddressIn) {
+    public Transaction(String bookTitle, String bookAuthor, String timeOut, String timeIn, String branchAddressOut, String branchAddressIn) {
         this.setBookTitle(bookTitle);
         this.setBookAuthor(bookAuthor);
         this.setTimeOut(timeOut);
@@ -52,28 +52,28 @@ public class Transaction {
     /**
      * @return the timeIn
      */
-    public Date getTimeIn() {
+    public String getTimeIn() {
         return timeIn;
     }
 
     /**
      * @param timeIn the timeIn to set
      */
-    public void setTimeIn(Date timeIn) {
+    public void setTimeIn(String timeIn) {
         this.timeIn = timeIn;
     }
 
     /**
      * @return the timeOut
      */
-    public Date getTimeOut() {
+    public String getTimeOut() {
         return timeOut;
     }
 
     /**
      * @param timeOut the timeOut to set
      */
-    public void setTimeOut(Date timeOut) {
+    public void setTimeOut(String timeOut) {
         this.timeOut = timeOut;
     }
 
