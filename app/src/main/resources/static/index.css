@@ -27,12 +27,12 @@ label  {
     float: right;
 }
 
-h1 {
-    display: inline;
+#login-form button, #emp-login-form button {
+    float: right;
 }
 
-#login-form button {
-    float: right;
+h1 {
+    display: inline;
 }
 
 #search-results {

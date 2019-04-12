@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Employee Login</title>
+        <link href="/index.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container">
+            <h1>NY Public Library System</h1>
+            <a style="float:right;" href="/">Home</a>
+            <h2>Employee Login</h2>
+            <form id="emp-login-form">
+                <p>
+                    <label for="login-username">Employee ID:</label>
+                    <input type="text" id="login-username" name="username"
+                            required="required" autofocus
+                            pattern="^[A-Za-z0-9_]{1,16}$"
+                            title="Username must be 1-16 characters and can only contain
+                            letters, numbers, and underscores"/>
+                </p>
+                <p>
+                    <label for="login-password">Password:</label>
+                    <input type="password" id="login-password" name="password"
+                            required="required"
+                            pattern=".{6,}"
+                            title="Password must have at least 6 characters"/>
+                </p>
+                <p>
+                    <label></label>
+                    <button id="login-btn" type="submit">Log in</button>
+                </p>
+            </form>
+        </div>
+    </body>
+</html>

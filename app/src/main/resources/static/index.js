@@ -49,7 +49,7 @@ function submitLoginForm(form, urlEncodedDataPairs) {
 
         switch(xhttp.status) {
             case 200: // HTTP 200: OK
-                // Members and Employees go to different pages
+                // Take member to memberHome.html
                 break;
             case 400: // HTTP 400: Bad request
                 alert(xhttp.responseText);
