@@ -34,25 +34,25 @@ public class TransactionDaoImpl implements TransactionDao {
         List<TransactionView> transactions = new ArrayList<TransactionView>();
 
         if (!StringUtils.IsNullOrWhiteSpace(memberID)) {
-            String query = "select \"Title\", \"Author\", \"TimeOut\", \"TimeIn\", "
-                    + "\"BranchAddressOut\", \"BranchAddressIn\" "
-                    + "from " 
-                    +     "(select \"Title\", \"Author\" "
-                    +     "from \"Book\" natural join \"Transaction\" "
-                    +     "where \"MemberID\" = \'" + memberID + "\') "
-                    +     "as \"TA\", "
-                    +     "(select \"Address\" as \"BranchAddressOut\" "
-                    +     "from \"Branch\" natural join \"Transaction\" "
-                    +     "where \"BranchOut\" = \"BranchID\" "
-                    +     "and \"MemberID\" = \'" + memberID + "\') "
-                    +     "as \"BO\", "
-                    +     "(select \"Address\" as \"BranchAddressIn\" "
-                    +     "from \"Branch\" natural join \"Transaction\" "
-                    +     "where \"BranchIn\" = \"BranchID\" "
-                    +     "and \"MemberID\" = \'" + memberID + "\') "
-                    +     "as \"BA\", "
-                    +     "\"Transaction\" "
-                    + "where \"MemberID\" = \'" + memberID + "\'";
+            String query = "select DISTINCT \"Title\", \"Author\", \"TA\".\"TimeOut\", \"TA\".\"TimeIn\", \"BranchAddressOut\", \"BranchAddressIn\""
+                + "from "
+                + "    (select \"Title\", \"Author\", \"BranchIn\", \"BranchOut\", \"TimeOut\", \"TimeIn\""
+                + "    from \"Book\" natural join \"Transaction\""
+                + "    where \"MemberID\" = \'" + memberID + "\') "
+                + "    as \"TA\", "
+                + "    (select \"BranchID\" as \"BOID\", \"TimeOut\" as \"BOTO\", \"Address\" as \"BranchAddressOut\""
+                + "    from \"Branch\" natural join \"Transaction\""
+                + "    where \"BranchOut\" = \"BranchID\""
+                + "    and \"MemberID\" = \'" + memberID + "\')"
+                + "    as \"BO\","
+                + "    (select \"BranchID\" as \"BIID\", \"TimeIn\" as \"BITI\", \"Address\" as \"BranchAddressIn\""
+                + "    from \"Branch\" natural join \"Transaction\""
+                + "    where (\"BranchIn\" = \"BranchID\" or \"BranchIn\" is NULL)"
+                + "    and \"MemberID\" = \'" + memberID + "\')"
+                + "    as \"BI\","
+                + "    \"Transaction\""
+                + "where \"MemberID\" = \'" + memberID + "\' and \"BIID\" = \"TA\".\"BranchIn\" and \"BOID\" = \"TA\".\"BranchOut\" and \"BITI\" = \"TA\".\"TimeIn\" and \"BOTO\" = \"TA\".\"TimeOut\""
+                + "order by \"TA\".\"TimeOut\"  desc";
             transactions = template.query(query, new TransactionViewRowMapper());
         }
 
