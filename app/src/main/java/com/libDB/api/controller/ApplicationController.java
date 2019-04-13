@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.ResponseEntity;
 
 import com.libDB.api.entity.Book;
+import com.libDB.api.entity.Branch;
 import com.libDB.api.service.BookService;
+import com.libDB.api.service.BranchService;
 import com.libDB.api.entity.Transaction;
 import com.libDB.api.service.TransactionService;
 import com.libDB.api.service.LoginService;
@@ -47,6 +49,16 @@ class ApplicationController {
             @RequestParam(name="memberID", required=true, defaultValue="") String memberID)
     {
         return transactionService.getTransactionsByMember(memberID);
+    }
+
+    @Resource
+    BranchService branchService;
+
+    @GetMapping(value = "/getBranchByID")
+    public Branch getBranchByID(
+            @RequestParam(name="employeeID", required=true, defaultValue="") String employeeID)
+    {
+        return branchService.getBranchByID(employeeID);   
     }
     
     @Resource

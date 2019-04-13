@@ -24,7 +24,7 @@ function submitLoginForm(form, credentials) {
 
         switch(xhttp.status) {
             case 200: // HTTP 200: OK
-                window.location.href = '/employeeHome.html?username=' + credentials.username;
+                window.location.href = '/employeeHome.html?employeeID=' + credentials.username;
                 break;
             case 400: // HTTP 400: Bad request
                 alert(xhttp.responseText);

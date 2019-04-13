@@ -1,7 +1,7 @@
-const checkedBooks = document.getElementById('checked-books-table');
-const pastTransactions = document.getElementById('transaction-table');
+const branchAddr = document.getElementById('branch-address');
 
 const username = getUrlVars()["username"];
+let branch;
 
 if (username !== "" && username !== undefined) {
     const xhttp = new XMLHttpRequest();
@@ -10,7 +10,7 @@ if (username !== "" && username !== undefined) {
 
         switch(xhttp.status) {
             case 200: // HTTP 200: OK
-                printTransactions(JSON.parse(xhttp.responseText));
+                printBranch(branch = JSON.parse(xhttp.responseText));
                 break;
             case 400: // HTTP 400: Bad request
                 alert(xhttp.responseText);
@@ -30,7 +30,7 @@ if (username !== "" && username !== undefined) {
     });
 
     // Set up our request
-    xhttp.open('GET', 'http://localhost:8080/api/getTransactions?memberID=' + username);
+    xhttp.open('GET', 'http://localhost:8080/api/getBranchByID?employeeID=' + username);
 
     // Finally, send our data.
     xhttp.send();
@@ -45,19 +45,7 @@ function getUrlVars() {
     return vars;
 }
 
-function printTransactions(transactions) {
-    // Add row to appropriate table
-    transactions.forEach((transaction) => {
-        const checkedOut = (transaction.timeIn === null);
-
-        const row = (checkedOut)
-            ? checkedBooks.insertRow()
-            : pastTransactions.insertRow();
-        row.insertCell(0).innerHTML = transaction.bookTitle;
-        row.insertCell(1).innerHTML = transaction.bookAuthor;
-        row.insertCell(2).innerHTML = transaction.timeOut;
-        row.insertCell(3).innerHTML = transaction.branchAddressOut;
-        row.insertCell(4).innerHTML = (checkedOut) ? "-" : transaction.timeIn;
-        row.insertCell(5).innerHTML = (checkedOut) ? "-" : transaction.branchAddressIn;
-    })
+function printBranch(branch) {
+    console.log(branch.address);
+    branchAddr.innerHTML = branch.address;
 }

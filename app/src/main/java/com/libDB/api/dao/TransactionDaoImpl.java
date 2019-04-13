@@ -59,16 +59,3 @@ public class TransactionDaoImpl implements TransactionDao {
         return transactions;
     }
 }
-/* this obviously doesnt work just thinking
-@Override
-public List<Transaction> getTransactionsByMember(String memberID) {
-
-    String query = "select Title, Author, TimeOut, TimeIn, Address, Address from public.\"Transaction\"";
-    
-    if (!StringUtils.IsNullOrWhiteSpace(memberid)) {
-        query += " where \"MemberID\" = \'" + memberid + "\' natural join public.\"Branch\" natural join public.\"Book\"";
-    }
-
-    return template.query(query, new TransactionRowMapper());
-}
-*/
