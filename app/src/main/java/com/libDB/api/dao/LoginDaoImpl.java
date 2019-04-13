@@ -47,9 +47,11 @@ public class LoginDaoImpl implements LoginDao {
         String query = "select * from public.\"EmployeeLogin\" where \"Username\" = \'" 
                     + id + "\' and \"Password\" = \'" + password + "\'";
 
+        List<Login> result = new ArrayList<Login>();
         if (!StringUtils.IsNullOrWhiteSpace(id) && !StringUtils.IsNullOrWhiteSpace(password)) {
-            System.out.println(template.query(query, new LoginRowMapper()));
+            result = template.query(query, new LoginRowMapper());
         }
-        return true;
+
+        return result.size() == 1;
     }
 }

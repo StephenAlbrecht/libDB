@@ -35,6 +35,6 @@ h1 {
     display: inline;
 }
 
-#search-results {
+#search-results, #transaction-table, #checked-books-table {
     width: 100%;
 }

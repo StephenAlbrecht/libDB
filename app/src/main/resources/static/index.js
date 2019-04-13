@@ -50,11 +50,7 @@ function submitLoginForm(form, credentials) {
 
         switch(xhttp.status) {
             case 200: // HTTP 200: OK
-                //TODO: configure backend to send 401 response if invalid
-                const isValid = xhttp.responseText === "true";
-                if (isValid) {
-                    window.location.href = '/memberHome.html?username=' + credentials.username;
-                }
+                window.location.href = '/memberHome.html?username=' + credentials.username;
                 break;
             case 400: // HTTP 400: Bad request
                 alert(xhttp.responseText);
@@ -118,9 +114,7 @@ function submitSearchForm(book) {
 
     // Define what happens in case of error
     xhttp.addEventListener('error', function () {
-        setInvisible(errorWindow, false);
-
-        errorMessageSpan.innerText = "Error: " + xhttp.statusText + " (" + xhttp.status + ")";
+        alert("Error: " + xhttp.statusText + " (" + xhttp.status + ")");
     });
 
     const params = `id=${book.id}&isbn=${book.isbn}&title=${book.title}&author=${book.author}&genre=${book.genre}`;

@@ -1,20 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Member Home</title>
-    <link href="/index.css" rel="stylesheet">
-</head>
-<body>
-    <div class="container">
-        <h1>Member Dashboard</h1>
-        <a style="float:right;" href="/">Log out</a>
-        
-        <h2>Books Checked Out</h2>
-        <table class="checked-books-table"></table>
-        
-        <h2>Transactions</h2>
-        <table class="transaction-table"></table>
-    </div>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Member Home</title>
+        <link href="/index.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container">
+            <h1>Member Dashboard</h1>
+            <a style="float:right;" href="/">Log out</a>
+            
+            <h2>Books Checked Out</h2>
+            <table id="checked-books-table">
+                <tr>
+                    <td><b>Title</b></td>
+                    <td><b>Author</b></td>
+                    <td><b>Time Out</b></td>
+                    <td><b>Branch Out</b></td>
+                    <td><b>Time In</b></td>
+                    <td><b>Branch In</b></td>
+                </tr>
+            </table>
+            
+            <h2>Transaction History</h2>
+            <table id="transaction-table">
+                <tr>
+                    <td><b>Title</b></td>
+                    <td><b>Author</b></td>
+                    <td><b>Time Out</b></td>
+                    <td><b>Branch Out</b></td>
+                    <td><b>Time In</b></td>
+                    <td><b>Branch In</b></td>
+                </tr>
+            </table>
+        </div>
+    </body>
+    <script src="/memberHome.js"></script>
 </html>

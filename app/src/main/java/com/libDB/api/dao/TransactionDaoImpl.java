@@ -3,6 +3,7 @@ package com.libDB.api.dao;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -30,14 +31,32 @@ public class TransactionDaoImpl implements TransactionDao {
 
     @Override
     public List<Transaction> getTransactionsByMember(String memberID) {
+        List<Transaction> transactions = new ArrayList<Transaction>();
 
-        String query = "select * from public.\"Transaction\"";
-        
         if (!StringUtils.IsNullOrWhiteSpace(memberID)) {
-            query += " where \"MemberID\" = \'" + memberID + "\'";
+            String query = "select \"Title\", \"Author\", \"TimeOut\", \"TimeIn\", "
+                    + "\"BranchAddressOut\", \"BranchAddressIn\" "
+                    + "from " 
+                    +     "(select \"Title\", \"Author\" "
+                    +     "from \"Book\" natural join \"Transaction\" "
+                    +     "where \"MemberID\" = \'" + memberID + "\') "
+                    +     "as \"TA\", "
+                    +     "(select \"Address\" as \"BranchAddressOut\" "
+                    +     "from \"Branch\" natural join \"Transaction\" "
+                    +     "where \"BranchOut\" = \"BranchID\" "
+                    +     "and \"MemberID\" = \'" + memberID + "\') "
+                    +     "as \"BO\", "
+                    +     "(select \"Address\" as \"BranchAddressIn\" "
+                    +     "from \"Branch\" natural join \"Transaction\" "
+                    +     "where \"BranchIn\" = \"BranchID\" "
+                    +     "and \"MemberID\" = \'" + memberID + "\') "
+                    +     "as \"BA\", "
+                    +     "\"Transaction\" "
+                    + "where \"MemberID\" = \'" + memberID + "\'";
+            transactions = template.query(query, new TransactionRowMapper());
         }
 
-        return template.query(query, new TransactionRowMapper());
+        return transactions;
     }
 }
 /* this obviously doesnt work just thinking

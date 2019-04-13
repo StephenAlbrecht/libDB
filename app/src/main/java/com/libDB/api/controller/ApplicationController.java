@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
 
 import com.libDB.api.entity.Book;
 import com.libDB.api.service.BookService;
@@ -52,18 +53,22 @@ class ApplicationController {
     LoginService loginService;
 
     @PostMapping(value = "/memberLogin")
-    public boolean memberLogin(
+    public ResponseEntity<String> memberLogin(
         @RequestParam(name="username", required=true, defaultValue="") String id,
         @RequestParam(name="password", required=true, defaultValue="") String password)
     {
-        return loginService.validateMember(id, password);
+        return (loginService.validateMember(id, password))
+            ? ResponseEntity.ok().body("Access granted")
+            : ResponseEntity.status(401).body("Invalid credentials.");
     }
     
     @PostMapping(value = "/employeeLogin")
-    public boolean employeeLogin(
+    public ResponseEntity<String> employeeLogin(
         @RequestParam(name="username", required=true, defaultValue="") String id,
         @RequestParam(name="password", required=true, defaultValue="") String password)
     {
-        return loginService.validateEmployee(id, password);
+        return (loginService.validateEmployee(id, password))
+        ? ResponseEntity.ok().body("Access granted")
+        : ResponseEntity.status(401).body("Invalid credentials.");
     }
 }
