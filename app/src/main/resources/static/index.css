@@ -17,6 +17,12 @@ label  {
     margin-right: auto;
 }
 
+@media (max-width: 1370px) {
+    .container {
+        width: 90%;
+    }
+}
+
 #login-form {
     float: right;
 }

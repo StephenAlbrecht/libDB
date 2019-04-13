@@ -37,44 +37,52 @@
         </div>
         <div class="container">
             <h2>Book Search</h2>
-            <form id="search-form">                
-                <p>
-                    <label for="bookID">Book ID:</label>
-                    <input type="text" id="bookID" name="bookID">
-                </p>
-
-                <p>
-                    <label for="isbn">ISBN:</label>
-                    <input type="text" id="isbn" name="isbn">
-                </p>
-                
-                <p>
-                    <label for="book-title">Title:</label>
-                    <input type="text" id="book-title" name="book title">
-                </p>
-                
-                <p>
-                    <label for="book-author">Author:</label>
-                    <input type="text" id="book-author" name="book author">
-                </p>
-                
-                <p>
-                    <label for="book-genre">Genre:</label>
-                    <input type="text" id="book-genre" name="book genre">
-                </p>
-                
-                <p>
-                    <label for="branch-address">Branch:</label>
-                    <input type="text" id="branch-address" name="branch address">
-                </p>
-                <p>
-                    <label></label>
-                    <button type="submit" style="float: right;">Search</button>
-                </p>
-            </form>
-            <p>If searching by the Author's full name, enter it in the form: Last name, First name</p>
-            <p>Book titles that start with "The" should be entered in the form: Name, The</p>
-            <p>Branch addresses must be entered exactly. Checked out books will not appear in these results.</p>
+            <table style="border-spacing: 0;">
+                <tr>
+                    <td style="min-width:240px;">
+                        <form id="search-form">                
+                            <p>
+                                <label for="bookID">Book ID:</label>
+                                <input type="text" id="bookID" name="bookID">
+                            </p>
+            
+                            <p>
+                                <label for="isbn">ISBN:</label>
+                                <input type="text" id="isbn" name="isbn">
+                            </p>
+                            
+                            <p>
+                                <label for="book-title">Title:</label>
+                                <input type="text" id="book-title" name="book title">
+                            </p>
+                            
+                            <p>
+                                <label for="book-author">Author:</label>
+                                <input type="text" id="book-author" name="book author">
+                            </p>
+                            
+                            <p>
+                                <label for="book-genre">Genre:</label>
+                                <input type="text" id="book-genre" name="book genre">
+                            </p>
+                            
+                            <p>
+                                <label for="branch-address">Branch:</label>
+                                <input type="text" id="branch-address" name="branch address">
+                            </p>
+                            <p>
+                                <label></label>
+                                <button type="submit" style="float: right;">Search</button>
+                            </p>
+                        </form>
+                    </td>
+                    <td style="vertical-align: initial; padding-left: 10px;">
+                        If searching by the Author's full name, enter it in the form: Last name, First name
+                        <p>Book titles that start with "The" should be entered in the form: Name, The</p>
+                        <p>Branch addresses must be entered exactly. Checked out books will not appear in these results.</p>
+                    </td>
+                </tr>
+            </table>
             <h3>Search Results</h3>
             <table id="search-results">
                 <tr>
