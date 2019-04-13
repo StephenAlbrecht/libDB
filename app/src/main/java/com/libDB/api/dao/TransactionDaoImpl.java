@@ -16,8 +16,8 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-import com.libDB.api.entity.Transaction;
-import com.libDB.api.mapper.TransactionRowMapper;
+import com.libDB.api.entity.TransactionView;
+import com.libDB.api.mapper.TransactionViewRowMapper;
 import com.libDB.util.StringUtils;
 
 @Repository
@@ -30,8 +30,8 @@ public class TransactionDaoImpl implements TransactionDao {
     }
 
     @Override
-    public List<Transaction> getTransactionsByMember(String memberID) {
-        List<Transaction> transactions = new ArrayList<Transaction>();
+    public List<TransactionView> getTransactionsByMember(String memberID) {
+        List<TransactionView> transactions = new ArrayList<TransactionView>();
 
         if (!StringUtils.IsNullOrWhiteSpace(memberID)) {
             String query = "select \"Title\", \"Author\", \"TimeOut\", \"TimeIn\", "
@@ -53,7 +53,7 @@ public class TransactionDaoImpl implements TransactionDao {
                     +     "as \"BA\", "
                     +     "\"Transaction\" "
                     + "where \"MemberID\" = \'" + memberID + "\'";
-            transactions = template.query(query, new TransactionRowMapper());
+            transactions = template.query(query, new TransactionViewRowMapper());
         }
 
         return transactions;

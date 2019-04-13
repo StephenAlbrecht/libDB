@@ -7,7 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Component;
 
 import com.libDB.api.dao.TransactionDao;
-import com.libDB.api.entity.Transaction;
+import com.libDB.api.entity.TransactionView;
 
 @Component
 public class TransactionServiceImpl implements TransactionService {
@@ -16,7 +16,7 @@ public class TransactionServiceImpl implements TransactionService {
     TransactionDao TransactionDao;
 
     @Override
-    public List<Transaction> getTransactionsByMember(String memberID) {
+    public List<TransactionView> getTransactionsByMember(String memberID) {
         return TransactionDao.getTransactionsByMember(memberID);
     }
 }

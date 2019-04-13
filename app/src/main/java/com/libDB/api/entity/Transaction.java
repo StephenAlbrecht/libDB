@@ -1,52 +1,50 @@
 package com.libDB.api.entity;
 
-import java.sql.Date;
-
 public class Transaction {
-    private String bookTitle;
-    private String bookAuthor;
+    private String bookID;
+    private String memberID;
     private String timeOut;
     private String timeIn;
-    private String branchAddressOut;
-    private String branchAddressIn;
+    private String branchOut;
+    private String branchIn;
 
     public Transaction() {}
 
-    public Transaction(String bookTitle, String bookAuthor, String timeOut, String timeIn, String branchAddressOut, String branchAddressIn) {
-        this.setBookTitle(bookTitle);
-        this.setBookAuthor(bookAuthor);
+    public Transaction(String bookID, String memberID, String timeOut, String timeIn, String branchOut, String branchIn) {
+        this.setBookID(bookID);
+        this.setMemberID(memberID);
         this.setTimeOut(timeOut);
         this.setTimeIn(timeIn);
-        this.setBranchAddressOut(branchAddressOut);
-        this.setBranchAddressIn(branchAddressIn);
+        this.setBranchOut(branchOut);
+        this.setBranchIn(branchIn);
     }
 
     /**
-     * @return the branchAddressIn
+     * @return the branchIn
      */
-    public String getBranchAddressIn() {
-        return branchAddressIn;
+    public String getBranchIn() {
+        return branchIn;
     }
 
     /**
-     * @param branchAddressIn the branchAddressIn to set
+     * @param branchAddressIn the branchIn to set
      */
-    public void setBranchAddressIn(String branchAddressIn) {
-        this.branchAddressIn = branchAddressIn;
+    public void setBranchIn(String branchIn) {
+        this.branchIn = branchIn;
     }
 
     /**
-     * @return the branchAddressOut
+     * @return the branchOut
      */
-    public String getBranchAddressOut() {
-        return branchAddressOut;
+    public String getBranchOut() {
+        return branchOut;
     }
 
     /**
-     * @param branchAddressOut the branchAddressOut to set
+     * @param branchOut the branchOut to set
      */
-    public void setBranchAddressOut(String branchAddressOut) {
-        this.branchAddressOut = branchAddressOut;
+    public void setBranchOut(String branchOut) {
+        this.branchOut = branchOut;
     }
 
     /**
@@ -78,30 +76,30 @@ public class Transaction {
     }
 
     /**
-     * @return the bookTitle
+     * @return the memberID
      */
-    public String getBookTitle() {
-        return bookTitle;
+    public String getMemberID() {
+        return memberID;
     }
 
     /**
-     * @param bookId the bookTitle to set
+     * @param memberID the memberID to set
      */
-    public void setBookTitle(String bookTitle) {
-        this.bookTitle = bookTitle;
+    public void setMemberID(String memberID) {
+        this.memberID = memberID;
     }
 
     /**
-     * @return the bookAuthor
+     * @return the bookID
      */
-    public String getBookAuthor() {
-        return bookAuthor;
+    public String getBookID() {
+        return bookID;
     }
 
     /**
-     * @param bookAuthor the bookAuthor to set
+     * @param bookID the bookID to set
      */
-    public void setBookAuthor(String bookAuthor) {
-        this.bookAuthor = bookAuthor;
+    public void setBookID(String bookID) {
+        this.bookID = bookID;
     }
 }

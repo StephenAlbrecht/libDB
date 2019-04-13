@@ -18,9 +18,10 @@ import com.libDB.api.entity.Book;
 import com.libDB.api.entity.Branch;
 import com.libDB.api.service.BookService;
 import com.libDB.api.service.BranchService;
-import com.libDB.api.entity.Transaction;
+import com.libDB.api.entity.TransactionView;
 import com.libDB.api.service.TransactionService;
 import com.libDB.api.service.LoginService;
+import com.libDB.api.service.CheckBookService;
 
 
 @RestController
@@ -45,7 +46,7 @@ class ApplicationController {
     TransactionService transactionService;
 
     @GetMapping(value = "/getTransactions")
-    public List<Transaction> getTransactions(
+    public List<TransactionView> getTransactions(
             @RequestParam(name="memberID", required=true, defaultValue="") String memberID)
     {
         return transactionService.getTransactionsByMember(memberID);
@@ -80,7 +81,28 @@ class ApplicationController {
         @RequestParam(name="password", required=true, defaultValue="") String password)
     {
         return (loginService.validateEmployee(id, password))
-        ? ResponseEntity.ok().body("Access granted")
-        : ResponseEntity.status(401).body("Invalid credentials.");
+            ? ResponseEntity.ok().body("Access granted")
+            : ResponseEntity.status(401).body("Invalid credentials.");
+    }
+
+    @Resource
+    CheckBookService checkBookService;
+
+    @PostMapping(value = "/checkOutBook")
+    public ResponseEntity<String> checkOutBook(
+        @RequestParam(name="branchID", required=true, defaultValue="") String branchID,
+        @RequestParam(name="memberID", required=true, defaultValue="") String memberID,
+        @RequestParam(name="bookID", required=true, defaultValue="") String bookID)
+    {
+        return checkBookService.checkOut(branchID, memberID, bookID);
+    }
+    
+    @PostMapping(value = "/checkInBook")
+    public ResponseEntity<String> checkInBook(
+        @RequestParam(name="branchID", required=true, defaultValue="") String branchID,
+        @RequestParam(name="memberID", required=true, defaultValue="") String memberID,
+        @RequestParam(name="bookID", required=true, defaultValue="") String bookID)
+    {
+        return checkBookService.checkIn(branchID, memberID, bookID);
     }
 }

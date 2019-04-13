@@ -12,12 +12,12 @@ public class TransactionRowMapper implements RowMapper<Transaction> {
     @Override
     public Transaction mapRow(ResultSet rs, int arg1) throws SQLException {
         Transaction transaction = new Transaction();
-        transaction.setBookTitle(rs.getString("Title"));
-        transaction.setBookAuthor(rs.getString("Author"));
+        transaction.setBookID(rs.getString("BookID"));
+        transaction.setMemberID(rs.getString("MemberID"));
         transaction.setTimeOut(rs.getString("TimeOut"));
         transaction.setTimeIn(rs.getString("TimeIn"));
-        transaction.setBranchAddressOut(rs.getString("BranchAddressOut"));
-        transaction.setBranchAddressIn(rs.getString("BranchAddressIn"));
+        transaction.setBranchOut(rs.getString("BranchOut"));
+        transaction.setBranchIn(rs.getString("BranchIn"));
 
         return transaction;
     }
