@@ -6,5 +6,5 @@ import com.libDB.api.entity.Book;
 
 public interface BookDao {
     
-    List<Book> getBooksByOptions(String id, String isbn, String title, String author, String genre);
+    List<Book> getBooksByOptions(String id, String isbn, String title, String author, String genre, String address);
 }

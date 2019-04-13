@@ -62,9 +62,19 @@
                     <label for="book-genre">Genre:</label>
                     <input type="text" id="book-genre" name="book genre">
                 </p>
-                <button type="submit">Search</button>
+                
+                <p>
+                    <label for="branch-address">Branch:</label>
+                    <input type="text" id="branch-address" name="branch address">
+                </p>
+                <p>
+                    <label></label>
+                    <button type="submit" style="float: right;">Search</button>
+                </p>
             </form>
             <p>If searching by the Author's full name, enter it in the form: Last name, First name</p>
+            <p>Book titles that start with "The" should be entered in the form: Name, The</p>
+            <p>Branch addresses must be entered exactly. Checked out books will not appear in these results.</p>
             <h3>Search Results</h3>
             <table id="search-results">
                 <tr>
@@ -74,6 +84,7 @@
                     <td><b>Author</b></td>
                     <td><b>Genre</b></td>
                     <td><b>Pages</b></td>
+                    <td><b>Branch</b></td>
                 </tr>
             </table>
         </div>

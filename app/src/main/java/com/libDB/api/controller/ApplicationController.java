@@ -37,9 +37,10 @@ class ApplicationController {
             @RequestParam(name="isbn", required=false, defaultValue="") String isbn,
             @RequestParam(name="title", required=false, defaultValue="") String title,
             @RequestParam(name="author", required=false, defaultValue="") String author,
-            @RequestParam(name="genre", required=false, defaultValue="") String genre) 
+            @RequestParam(name="genre", required=false, defaultValue="") String genre,
+            @RequestParam(name="address", required=false, defaultValue="") String address)
     {
-        return bookService.getBooksByOptions(id, isbn, title, author, genre);
+        return bookService.getBooksByOptions(id, isbn, title, author, genre, address);
     }
 
     @Resource

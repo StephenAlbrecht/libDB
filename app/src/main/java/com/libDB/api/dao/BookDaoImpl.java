@@ -29,46 +29,35 @@ public class BookDaoImpl implements BookDao {
     }
 
     @Override
-    public List<Book> getBooksByOptions(String id, String isbn, String title, String author, String genre) {
+    public List<Book> getBooksByOptions(String id, String isbn, String title, String author, String genre, String address) {
 
-        String query = "select * from public.\"Book\"";
+        String query = "select * from (select \"Book\".\"BookID\", \"ISBN\", \"Title\", \"Author\", \"Genre\", \"NumPages\", \"Address\" from public.\"Book\" left outer join \"InStock\" on \"Book\".\"BookID\" = \"InStock\".\"BookID\" full outer join \"Branch\" on \"InStock\".\"BranchID\" = \"Branch\".\"BranchID\" where \"Book\".\"BookID\" is not NULL ) as \"Book\" where 1=1";
         
-        boolean addAndToQuery = false;
         if (!StringUtils.IsNullOrWhiteSpace(id)) {
-            query += " where \"BookID\" = \'" + id + "\'";
-            addAndToQuery = true;
+            query += " and \"BookID\" = \'" + id + "\'";
         }
         
         if (!StringUtils.IsNullOrWhiteSpace(isbn)) {
-            String constraint = "\"ISBN\" = \'" + isbn + "\'";
-            query += (addAndToQuery)
-                ? " and " + constraint
-                : " where " + constraint;
-            addAndToQuery = true;
+            query += " and \"ISBN\" = \'" + isbn + "\'";
         }
         
         if (!StringUtils.IsNullOrWhiteSpace(title)) {
-            String constraint = "\"Title\" LIKE \'%" + title + "%\'";
-            query += (addAndToQuery)
-                ? " and " + constraint
-                : " where " + constraint;
-            addAndToQuery = true;
+            query += " and \"Title\" LIKE \'%" + title + "%\'";
         }
         
         if (!StringUtils.IsNullOrWhiteSpace(author)) {
-            String constraint = "\"Author\" LIKE \'%" + author + "%\'";
-            query += (addAndToQuery)
-                ? " and " + constraint
-                : " where " + constraint;
-            addAndToQuery = true;
+            query += " and \"Author\" LIKE \'%" + author + "%\'";
         }
         
         if (!StringUtils.IsNullOrWhiteSpace(genre)) {
-            String constraint = "\"Genre\" LIKE \'%" + genre + "%\'";
-            query += (addAndToQuery)
-                ? " and " + constraint
-                : " where " + constraint;
+            query += " and \"Genre\" = \'" + genre + "\'";
         }
+        
+        if (!StringUtils.IsNullOrWhiteSpace(address)) {
+            query += " and \"Address\" = \'" + address + "\'";
+        }
+
+        query += "  order by \"Author\", \"Title\"";
 
         return template.query(query, new BookRowMapper());
     }

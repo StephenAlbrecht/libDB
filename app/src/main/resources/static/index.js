@@ -30,13 +30,15 @@ searchForm.addEventListener('submit', (formEvent) => {
     const title = document.getElementById('book-title').value;
     const author = document.getElementById('book-author').value;
     const genre = document.getElementById('book-genre').value;
+    const address = document.getElementById('branch-address').value;
     
     const book = {
         "id": id,
         "isbn": isbn,
         "title": title,
         "author": author,
-        "genre": genre
+        "genre": genre,
+        "address" : address
     }
 
     submitSearchForm(book);
@@ -117,7 +119,7 @@ function submitSearchForm(book) {
         alert("Error: " + xhttp.statusText + " (" + xhttp.status + ")");
     });
 
-    const params = `id=${book.id}&isbn=${book.isbn}&title=${book.title}&author=${book.author}&genre=${book.genre}`;
+    const params = `id=${book.id}&isbn=${book.isbn}&title=${book.title}&author=${book.author}&genre=${book.genre}&address=${book.address}`;
 
     // Set up our request
     xhttp.open('GET', 'http://localhost:8080/api/getBooks?' + params);
@@ -141,6 +143,7 @@ function printBooks(bookList) {
     header.insertCell(3).innerHTML = "Author".bold();
     header.insertCell(4).innerHTML = "Genre".bold();
     header.insertCell(5).innerHTML = "Pages".bold();
+    header.insertCell(6).innerHTML = "Branch".bold();
 
     // Add new row for each entry
     bookList.forEach((book) => {
@@ -151,5 +154,8 @@ function printBooks(bookList) {
         row.insertCell(3).innerHTML = book.author;
         row.insertCell(4).innerHTML = book.genre;
         row.insertCell(5).innerHTML = book.pages;
+        row.insertCell(6).innerHTML = (book.address === null) 
+            ? "-- Checked out --" 
+            : book.address;
     })
 }

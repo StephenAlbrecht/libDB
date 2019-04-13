@@ -6,17 +6,19 @@ public class Book {
     private String title;
     private String author;
     private String genre;
-    private int pages;
+    private String pages;
+    private String address;
 
     public Book() {}
 
-    public Book(String id, String isbn, String title, String author, String genre, int pages) {
-        this.id     = id;
-        this.isbn   = isbn;
-        this.title  = title;
-        this.author = author;
-        this.genre  = genre;
-        this.pages  = pages;
+    public Book(String id, String isbn, String title, String author, String genre, String pages, String address) {
+        this.id      = id;
+        this.isbn    = isbn;
+        this.title   = title;
+        this.author  = author;
+        this.genre   = genre;
+        this.pages   = pages;
+        this.address = address;
     }
 
     /**
@@ -29,14 +31,14 @@ public class Book {
     /**
      * @return the pages
      */
-    public int getPages() {
+    public String getPages() {
         return pages;
     }
 
     /**
      * @param pages the pages to set
      */
-    public void setPages(int pages) {
+    public void setPages(String pages) {
         this.pages = pages;
     }
 
@@ -101,5 +103,19 @@ public class Book {
      */
     public void setId(String id) {
         this.id = id;
+    }
+
+    /**
+     * @return the address
+     */
+    public String getAddress() {
+        return address;
+    }
+
+    /**
+     * @param address the address to set
+     */
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
