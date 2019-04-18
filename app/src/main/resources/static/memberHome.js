@@ -32,7 +32,7 @@ if (username !== "" && username !== undefined) {
     // Set up our request
     xhttp.open('GET', 'http://localhost:8080/api/getTransactions?memberID=' + username);
 
-    // Finally, send our data.
+    // Send our data
     xhttp.send();
 }
 
@@ -48,7 +48,7 @@ function getUrlVars() {
 function printTransactions(transactions) {
     // Add row to appropriate table
     transactions.forEach((transaction) => {
-        const checkedOut = (transaction.timeIn === null);
+        const checkedOut = (transaction.timeIn === '-');
 
         const row = (checkedOut)
             ? checkedBooks.insertRow()
